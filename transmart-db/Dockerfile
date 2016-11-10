@@ -1,11 +1,12 @@
 FROM debian:jessie
 MAINTAINER Denny Verbeeck <dverbeec@its.jnj.com>
 
-RUN apt-get update && apt-get install -y --no-install-recommends curl unzip make
-RUN curl http://library.transmartfoundation.org/release/release16_1_0_artifacts/transmart-data-release-16.1.zip -o transmart-data-release-16.1.zip && \
-    unzip transmart-data-release-16.1.zip && \
-    mv transmart-data-release-16.1 transmart-data && \
-    rm transmart-data-release-16.1.zip
+RUN apt-get update && apt-get install -y --no-install-recommends curl unzip make ca-certificates
+# This is the latest commit at November 9th 2016, the week after the release of eTRIKS v3.0
+RUN curl -L https://github.com/transmart/transmart-data/archive/d72385fca7b68011524aa12d9d0e7e1478e7e68a.zip -o transmart-data.zip && \
+    unzip transmart-data.zip && \
+    mv transmart-data-d72385fca7b68011524aa12d9d0e7e1478e7e68a transmart-data && \
+    rm transmart-data.zip
 
 #### PostgreSQL Setup
 # Add the PostgreSQL PGP key to verify their Debian packages.
@@ -54,7 +55,7 @@ RUN cd transmart-data && make -C env /var/lib/postgresql/tablespaces ../vars && 
     /etc/init.d/postgresql stop
     
 RUN rm -fR transmart-data-release-16.1.zip transmart-data && \
-    apt-get purge -y --auto-remove curl unzip make php5-cli php5-json
+    apt-get purge -y --auto-remove curl unzip make php5-cli php5-json ca-certificates
 
 VOLUME ["/var/lib/postgresql/tablespaces", "/var/log/postgresql", "/var/lib/postgresql"]
 
