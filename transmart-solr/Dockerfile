@@ -9,7 +9,7 @@ RUN curl -L https://github.com/transmart/transmart-data/archive/d72385fca7b68011
     rm transmart-data.zip
 
 ENV TABLESPACES=dummy PGHOST=tmdb PGPORT=5432 PGDATABASE=transmart
-	
+
 WORKDIR /transmart-data
 
 RUN make -C solr solr-4.5.0.tgz && \

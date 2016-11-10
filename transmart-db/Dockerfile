@@ -12,7 +12,7 @@ RUN curl -L https://github.com/transmart/transmart-data/archive/d72385fca7b68011
 # Add the PostgreSQL PGP key to verify their Debian packages.
 # It should be the same key as https://www.postgresql.org/media/keys/ACCC4CF8.asc
 RUN apt-get install -y locales && rm -rf /var/lib/apt/lists/* \
-	&& localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8
+    && localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8
 ENV LANG en_US.utf8
 
 RUN apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys B97B0AFCAA1A47F044F244A07FCC7D46ACCC4CF8
@@ -40,7 +40,7 @@ RUN echo "listen_addresses='*'" >> /etc/postgresql/9.3/main/postgresql.conf
 # Create a PostgreSQL role named ``docker`` with ``docker`` as the password
 RUN /etc/init.d/postgresql start && \
     psql --command "CREATE USER docker WITH SUPERUSER PASSWORD 'docker';" && \
-	/etc/init.d/postgresql stop
+    /etc/init.d/postgresql stop
 
 #### Load transmart db
 
@@ -50,7 +50,7 @@ RUN apt-get install -y --no-install-recommends php5-cli php5-json sudo
 
 RUN cd transmart-data && make -C env /var/lib/postgresql/tablespaces ../vars && \
     . ./vars && \
-	/etc/init.d/postgresql start && \
+    /etc/init.d/postgresql start && \
     make postgres && \
     /etc/init.d/postgresql stop
     
