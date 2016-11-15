@@ -11,7 +11,7 @@ services:
       - "./transmart-web/httpd-vhosts.conf:/usr/local/apache2/conf/extra/httpd-vhosts.conf"
       - "./transmart-web/httpd.conf:/usr/local/apache2/conf/httpd.conf"
   tmapp:
-    build: ./transmart-app
+    image: dennyverbeeck/transmart-app
     restart: unless-stopped
     ports:
       - "127.0.0.1:8009:8009"
@@ -23,19 +23,19 @@ services:
       - "./transmart-app/DataSource.groovy:/root/.grails/transmartConfig/DataSource.groovy"
       - "./transmart-app/setenv.sh:/usr/local/tomcat/bin/setenv.sh"
   tmdb:
-    build: ./transmart-db
+    image: dennyverbeeck/transmart-db
     restart: unless-stopped
     ports:
       - "127.0.0.1:5432:5432"
   tmsolr:
-    build: ./transmart-solr
+    image: dennyverbeeck/transmart-solr
     restart: unless-stopped
   tmrserve:
-    build: ./transmart-rserve
+    build: dennyverbeeck/transmart-rserve
     restart: unless-stopped
     volumes_from:
       - tmapp
   tmload:
-    build: ./transmart-load
+    build: dennyverbeeck/transmart-load
     depends_on:
       - tmdb
