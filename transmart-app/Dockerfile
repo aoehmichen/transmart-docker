@@ -1,5 +1,5 @@
 FROM tomcat:7-jre8
-MAINTAINER Denny Verbeeck <dverbeec@its.jnj.com>
+MAINTAINER Axel Oehmichen <axelfrancois.oehmichen11@imperial.ac.uk>
 
 RUN curl -L 'https://api.onedrive.com/v1.0/shares/s!AmuQT6XMtdBag7RZ45XrbpArTBYORw/root/content' -o /usr/local/tomcat/webapps/transmart.war
 
