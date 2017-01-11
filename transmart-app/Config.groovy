@@ -166,6 +166,13 @@ environments { development {
 // com.recomdata.providerURL
 /* }}} */
 
+com.eae.interfaceEAEURL = 'https://interfaceeae:8433/'
+com.eae.mongoURL = 'mongo:27017'
+com.eae.mongoUser = 'eae'
+com.eae.mongoPassword = 'eae'
+com.eae.eaeEnabled = true
+
+
 /* {{{ Login */
 // Session timeout and heartbeat frequency (ping interval)
 com.recomdata.sessionTimeout = 1800
